@@ -8,9 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kovynev.vahta.entity.Company;
 import ru.kovynev.vahta.rep.CompanyRepository;
 import ru.kovynev.vahta.rep.ReviewRepository;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 
 @Controller
@@ -29,8 +34,9 @@ public class AdminCompanyController {
     }
 
     @PostMapping("")
-    public String addCompany(@ModelAttribute("company") Company company) {
+    public String addCompany(@ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
         companyRepository.save(company);
+        Files.copy(file.getInputStream(), Path.of("/home/distr/images/company/" + company.getId() + ".jpg"));
         return "redirect:/administrator";
     }
 
@@ -45,9 +51,12 @@ public class AdminCompanyController {
 
 
     @PatchMapping("/{id}")
-    public String update(@PathVariable(value = "id") long id, @ModelAttribute("company") Company company){
+    public String update(@PathVariable(value = "id") long id, @ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
         company.setId(id);
         companyRepository.save(company);
+       // Files.copy(file.getInputStream(), Path.of("/images/company/" + company.getId() + ".jpg"));
+        Files.copy(file.getInputStream(), Path.of("static/log/" + company.getId() + ".jpg"));
+        System.out.println("OK");
         return  "redirect:/administrator";
     }
 

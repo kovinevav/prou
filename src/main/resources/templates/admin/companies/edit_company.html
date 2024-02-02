@@ -47,10 +47,15 @@
             <div th:insert="admin/blocks/dashboard ::dashboard"></div>
 
 
-            <form th:method="PATCH" th:object="${company}" th:action="@{/admin/companies/{id}(id=${company.getId()})}">
+            <form th:method="PATCH" th:object="${company}" th:action="@{/admin/companies/{id}(id=${company.getId()})}"
+                  enctype="multipart/form-data">
                 <div class="container">
                     <label for="name">Название: </label>
                     <input type="text" th:field="*{name}" id="name" class="form-control"><br>
+                </div>
+                <div class="container">
+                    <label for="name">Фото: </label>
+                    <input type="file" name="file" id="file" class="form-control"><br>
                 </div>
                 <div class="container">
                     <label for="anons">Анонс: </label>

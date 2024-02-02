@@ -6,15 +6,19 @@
     <div class="container" th:each="review : ${reviews}">
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <p th:text="${review.name}">Name of autor</p>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <p th:text="${review.company.name}">Company</p>
+            </div>
+
+            <div class="col-md-3">
                 <a th:href="'/admin/reviews/' + ${review.id} + '/edit'">Редактировать</a>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <form th:method="delete"  th:action="'/admin/reviews/' + ${review.id}">
                     <input type="submit" value="Удалить">
                 </form>

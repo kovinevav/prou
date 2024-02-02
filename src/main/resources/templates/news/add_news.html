@@ -21,7 +21,7 @@
             <h2>Добавить новость</h2>
         </div>
 
-        <form th:method="POST" action="/company/new" th:object="${company}">
+        <form spellcheck=false th:method="POST" action="/company/new" th:object="${company}">
             <div class="container">
                 <label for="title">Заголовок: </label>
                 <input type="text" th:field="*{title}" id="title" class="form-control"><br>

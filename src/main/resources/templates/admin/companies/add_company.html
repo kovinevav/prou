@@ -21,15 +21,24 @@
             <h2>Добавить компанию</h2>
         </div>
 
-        <form th:method="POST" action="/admin/companies" th:object="${company}">
+        <form spellcheck=false th:method="POST" action="/admin/companies" th:object="${company}"
+              enctype="multipart/form-data">
             <div class="container">
                 <label for="name">Название: </label>
                 <input type="text" th:field="*{name}" id="name" class="form-control"><br>
             </div>
+
+            <div class="container">
+                <label for="name">Фото: </label>
+                <input type="file" name="file" id="file" class="form-control"><br>
+            </div>
+
             <div class="container">
                 <label for="anons">Анонс: </label>
                 <input type="text" th:field="*{anons}" id="anons" class="form-control"><br>
             </div>
+
+
             <div class="container">
                 <label for="text">Описание: </label>
                 <textarea th:field="*{text}" id="text" class="form-control" rows="15"></textarea>

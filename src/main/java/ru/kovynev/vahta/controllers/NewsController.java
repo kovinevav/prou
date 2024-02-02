@@ -23,8 +23,8 @@ public class NewsController{
 
     @GetMapping("")
     public String showAll(Model model) {
-        Iterable<News> companies = newsRepository.findAll();
-        model.addAttribute("companies", companies);
+        Iterable<News> news = newsRepository.findAll();
+        model.addAttribute("news", news);
         return "news/all_news";
     }
     @GetMapping("/{id}")

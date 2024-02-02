@@ -51,14 +51,21 @@
                     <label for="name">Название: </label>
                     <input type="text" th:field="*{title}" id="name" class="form-control"><br>
                 </div>
+
+                <div class="container">
+                    <label for="anons">Anons</label>
+                    <textarea th:field="*{anons}" rows="6" id="anons" class="form-control"></textarea><br>
+                </div>
+
                 <div class="container">
                     <label for="text">Text</label>
-                    <textarea th:field="*{text}" id="text" class="form-control"></textarea><br>
+                    <textarea th:field="*{text}" rows="15" id="text" class="form-control"></textarea><br>
                 </div>
 
                 <div class="container">
                     <input type="submit" value="Сохранить" class="btn btn-success">
                 </div>
+
 
             </form>
 

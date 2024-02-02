@@ -5,6 +5,7 @@ package ru.kovynev.vahta.controllers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,8 @@ public class CompanyController {
         Iterable<Review> reviews = reviewRepository.findByCompany(company);
         model.addAttribute("company", company);
         model.addAttribute("reviews", reviews);
+        String pathToPhoto = "/home/distr/images/company/" + company.getId() + ".jpg";
+        model.addAttribute("pathToPhoto", pathToPhoto);
         List<Review> reviewList = (List<Review>) reviews;
         if(reviewList.isEmpty()){
         Review review =new Review();
@@ -46,8 +49,8 @@ public class CompanyController {
     @GetMapping("")
     public String showAll(Model model) {
         logger.info("Show all companies");
-        //Iterable<Company> companies = companyRepository.findAll();
-        Iterable<Company> companies = companyRepository.findAllByOrderByIdDesc();
+        Iterable<Company> companies = companyRepository.findAll();
+        //Iterable<Company> companies = companyRepository.findAllByOrderByIdDesc(Pageable.ofSize(16));
 
         model.addAttribute("companies", companies);
         return "companies/all_companies";

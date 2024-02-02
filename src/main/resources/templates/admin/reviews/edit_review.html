@@ -54,10 +54,14 @@
                     <label for="review">Автор: </label>
                     <input type="text" th:field="*{name}" id="review" class="form-control"><br>
                 </div>
+                <div class="container">
+                    <label for="review">Компания: </label>
+                    <input type="text" th:field="*{company}" id="review" class="form-control"><br>
+                </div>
 
                 <div class="container">
                     <label for="text">Отзыв: </label>
-                    <textarea th:field="*{text}" id="text" class="form-control"></textarea><br>
+                    <textarea th:field="*{text}" id="text" class="form-control" rows="8"></textarea><br>
                 </div>
 
                 <div class="container">
