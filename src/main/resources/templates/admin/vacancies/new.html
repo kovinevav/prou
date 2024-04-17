@@ -15,15 +15,11 @@
 
 
 <div class="container">
-    <div th:insert="blocks/header :: header"></div>
+    <div th:insert="~{blocks/header :: header}"></div>
     <div class="accordion-body">
         <div class="container">
             <h2>Добавить вакансию</h2>
         </div>
-
-
-
-
 
         <form th:method="POST" action="/admin/vacancies" th:object="${vacancy}">
 
@@ -55,7 +51,7 @@
     </div>
 
 
-    <div th:insert="blocks/footer :: footer"></div>
+    <div th:insert="~{blocks/footer :: footer}"></div>
 </div>
 
 
