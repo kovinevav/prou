@@ -10,12 +10,17 @@ import ru.kovynev.vahta.rep.ReviewRepository;
 
 @Controller
 public class AdminReviewController {
-    @Autowired
+
+    final
     ReviewRepository reviewRepository;
+
+    public AdminReviewController(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
     @GetMapping("/admin/reviews")
     public String showAll(Model model) {
-        model.addAttribute("reviews", reviewRepository.findAll());
+        model.addAttribute("reviews", reviewRepository.findAllByOrderByIdDesc());
         return "admin/reviews/all_reviews";
     }
     @GetMapping("/admin/reviews/{id}/edit")

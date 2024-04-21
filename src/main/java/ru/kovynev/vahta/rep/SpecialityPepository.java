@@ -1,4 +1,7 @@
 package ru.kovynev.vahta.rep;
 
-public class SpecialityPepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import ru.kovynev.vahta.entity.Speciality;
+
+public interface SpecialityPepository  extends JpaRepository<Speciality, Long> {
 }

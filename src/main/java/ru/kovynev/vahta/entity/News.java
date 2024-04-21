@@ -26,8 +26,5 @@ public class News {
     public News() {
     }
 
-    /*@OneToMany
-    private List<Comment> commentList = new ArrayList<>();*/
-
 
 }

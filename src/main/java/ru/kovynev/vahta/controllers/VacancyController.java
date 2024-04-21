@@ -1,20 +1,31 @@
 package ru.kovynev.vahta.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.kovynev.vahta.entity.Company;
 import ru.kovynev.vahta.entity.Vacancy;
+import ru.kovynev.vahta.rep.CompanyRepository;
 import ru.kovynev.vahta.rep.VacanciesRepository;
 
 import java.util.Date;
 
 @Controller
 public class VacancyController {
-    @Autowired
+    final
     VacanciesRepository vacanciesRepository;
+    private final CompanyRepository companyRepository;
+    Logger logger = LogManager.getLogger("VacancyController.class");
+
+    public VacancyController(VacanciesRepository vacanciesRepository, CompanyRepository companyRepository) {
+        this.vacanciesRepository = vacanciesRepository;
+        this.companyRepository = companyRepository;
+    }
 
     @GetMapping("vacancies")
     public String showAll(Model model){
@@ -22,14 +33,6 @@ public class VacancyController {
 
         return "vacancies/all_vacancies";
     }
-
-    @PostMapping("vacancies")
-    public String createVacancy(Vacancy vacancy){
-        vacancy.setDate(new Date());
-        vacanciesRepository.save(vacancy);
-        return "vacancies/all_vacancies";
-    }
-
 
     @GetMapping("vacancies/{id}")
     public String show(@PathVariable("id") Long id, Model model){

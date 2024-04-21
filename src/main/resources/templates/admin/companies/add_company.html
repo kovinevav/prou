@@ -15,14 +15,14 @@
 
 
 <div class="container">
-    <div th:insert="blocks/header :: header"></div>
+    <div th:insert="~{blocks/header :: header}"></div>
     <div class="accordion-body">
         <div class="container">
             <h2>Добавить компанию</h2>
         </div>
 
         <form spellcheck=false th:method="POST" action="/admin/companies" th:object="${company}"
-              enctype="multipart/form-data">
+              enctype="multipart/form-data" >
             <div class="container">
                 <label for="name">Название: </label>
                 <input type="text" th:field="*{name}" id="name" class="form-control"><br>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,28 +20,33 @@
         <div class="container">
             <h2>Добавить вакансию</h2>
         </div>
-
         <form th:method="POST" action="/admin/vacancies" th:object="${vacancy}">
 
-            <div class="container">
-                <label for="idOfCompany">ID company: </label>
-                <input type="text" disabled th:field="*{idOfCompany}" id="idOfCompany" class="form-control"><br>
-            </div>
 
             <div class="container">
-                <label for="company">Company: </label>
-                <input type="text" disabled th:field="*{company.name}" id="company" class="form-control"><br>
+                <label for="company">Выберите компанию:</label>
+                <select th:field="*{company}" name="company" id="company" class="form-select">
+                    <option th:each="company : ${companies}" th:value="${company.id}"
+                            th:text="${company.name}"></option>
+                </select>
             </div>
+            <br>
+
 
             <div class="container">
-                <label for="name">Название: </label>
-                <input type="text" th:field="*{name}" id="name" class="form-control"><br>
+                <label for="speciality">Название вакансии</label>
+                <select th:field="*{speciality}" name="speciality" id="speciality" class="form-select">
+                    <option th:each="speciality : ${specialities}" th:value="${speciality.id}"
+                            th:text="${speciality.name}"></option>
+                </select>
             </div>
+            <br>
 
             <div class="container">
                 <label for="text">Описание: </label>
                 <textarea th:field="*{description}" rows="10" id="text" class="form-control"></textarea>
             </div>
+            <br>
             <div class="container">
                 <input type="submit" value="Опубликовать" class="btn btn-success">
             </div>

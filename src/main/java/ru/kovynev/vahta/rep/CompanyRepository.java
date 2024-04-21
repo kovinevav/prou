@@ -15,6 +15,8 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query("select c from  Company c order by 'id' desc limit 2")
     Iterable<Company> findAllByOrderByIdDesc(); //must have 2
 
+    Iterable<Company> findAllByNameContainingOrAnonsContaining(String name1, String name2);
+
 
 
 

@@ -15,16 +15,19 @@
 
 
 <div class="container">
-    <div th:insert="blocks/header :: header"></div>
+    <div th:insert="~{blocks/header :: header}"></div>
     <div class="accordion-body">
         <div class="container">
             <h2>Добавить новость</h2>
         </div>
-
-        <form th:method="POST" action="/admin/news" th:object="${news}">
+        <form th:method="POST" action="/admin/news" th:object="${news}"  enctype="multipart/form-data">
             <div class="container">
                 <label for="name">Заголовок: </label>
                 <input type="text" th:field="*{title}" id="name" class="form-control"><br>
+            </div>
+            <div class="container">
+                <label for="name">Фото: </label>
+                <input type="file" name="file" id="file" class="form-control"><br>
             </div>
 
             <div class="container">
@@ -46,7 +49,7 @@
     </div>
 
 
-    <div th:insert="blocks/footer :: footer"></div>
+    <div th:insert="~{blocks/footer :: footer}"></div>
 </div>
 
 

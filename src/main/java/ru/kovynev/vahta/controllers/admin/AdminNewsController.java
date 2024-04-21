@@ -3,20 +3,27 @@ package ru.kovynev.vahta.controllers.admin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kovynev.vahta.entity.News;
 import ru.kovynev.vahta.rep.NewsRepository;
-
-import java.util.Date;
+import ru.kovynev.vahta.services.admin.AddNewsService;
+import ru.kovynev.vahta.services.admin.AddNewsServiceInterface;
 
 @Controller
 public class AdminNewsController {
     Logger logger = LogManager.getLogger();
-    @Autowired
-    NewsRepository newsRepository;
+    final NewsRepository newsRepository;
+    @Qualifier("addNews")
+    final AddNewsServiceInterface addNewsService;
 
+    public AdminNewsController(NewsRepository newsRepository, AddNewsServiceInterface addNewsService) {
+        this.newsRepository = newsRepository;
+        this.addNewsService = addNewsService;
+    }
 
     @GetMapping("admin/news")
     public String showNews(Model model) {
@@ -27,13 +34,12 @@ public class AdminNewsController {
 
 
     @GetMapping("admin/news/new/{id}")
-    public String newNews(Model model,
+    public String addNews(Model model,
                           @PathVariable("id") long id) {
         News news = new News();
         model.addAttribute("news", news);
         return "admin/news/new_news";
     }
-
 
 
     @DeleteMapping("admin/news/{id}")
@@ -63,10 +69,12 @@ public class AdminNewsController {
         return "admin/news/new_news";
     }
 
+
+    //Принимаем и сохраняем новость
     @PostMapping("admin/news")
-    public String createNews(@ModelAttribute("news") News news) {
-        //news.setDate(new Date());
-        newsRepository.save(news);
+    public String createNews(@ModelAttribute("news") News news,
+                             @ModelAttribute("file") MultipartFile file) {
+        addNewsService.addNews(file, news);
         return "redirect:/admin/news";
     }
 

@@ -30,6 +30,7 @@ public class AdminUserController {
     @DeleteMapping("/user/{id}")
     public String deleteUser(@PathVariable(value = "id") Long id){
         UserEntity user = userRepository.findById(id).orElseThrow();
+        System.out.println(user.getName());
         userRepository.delete(user);
         return "admin/users/all_users";
     }

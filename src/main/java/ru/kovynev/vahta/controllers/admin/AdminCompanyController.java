@@ -1,7 +1,6 @@
 package ru.kovynev.vahta.controllers.admin;
 
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class AdminCompanyController {
     @PostMapping("")
     public String addCompany(@ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
         companyRepository.save(company);
-        Files.copy(file.getInputStream(), Path.of("/home/distr/images/company/" + company.getId() + ".jpg"));
+        Files.copy(file.getInputStream(), Path.of("images/company/" + company.getId() + ".jpg"));
         return "redirect:/administrator";
     }
 
@@ -49,15 +48,17 @@ public class AdminCompanyController {
     }
 
 
-
     @PatchMapping("/{id}")
     public String update(@PathVariable(value = "id") long id, @ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
         company.setId(id);
         companyRepository.save(company);
-       // Files.copy(file.getInputStream(), Path.of("/images/company/" + company.getId() + ".jpg"));
-        Files.copy(file.getInputStream(), Path.of("static/log/" + company.getId() + ".jpg"));
+        try {
+            Files.copy(file.getInputStream(), Path.of("/home/distr/images/company/" + company.getId() + ".jpg"));
+        } catch (Exception e) {
+            System.out.println("Ошибка при копировании логотипа компании на сервер");
+        }
         System.out.println("OK");
-        return  "redirect:/administrator";
+        return "redirect:/administrator";
     }
 
     @DeleteMapping("/{id}")
@@ -66,8 +67,6 @@ public class AdminCompanyController {
         companyRepository.delete(company);
         return "redirect:/administrator";
     }
-
-
 
 
 }

@@ -28,15 +28,11 @@
     <div><img src="https://mc.yandex.ru/watch/95821939" style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
-
-
-
+    <meta name="yandex-verification" content="a9576d65381a89cd" />
 </head>
 <body>
-
-
 <div class="container">
-    <div th:insert="blocks/header :: header"></div>
+    <div th:insert="~{blocks/header :: header}"></div>
 
     <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
@@ -47,7 +43,7 @@
         </div>
     </div>
 
-    <div th:insert="blocks/employers :: employers"></div>
+    <div th:insert="~{blocks/employers :: employers}"></div>
    <!-- <div th:insert="blocks/vacancies :: vacancies"></div>-->
 
     <div class="container">
@@ -64,7 +60,7 @@
 
 
     
-    <div th:insert="blocks/footer :: footer"></div>
+    <div th:insert="~{blocks/footer :: footer}"></div>
 
 </div>
 

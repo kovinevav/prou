@@ -8,15 +8,19 @@
                   <p th:text="${vacancy.company.name}">Name of company</p>
               </div>-->
 
-            <div class="col-md-4">
-                <p th:text="${vacancy.name}">Name of vacancy</p>
+            <div class="col-md-3">
+                <p th:text="${vacancy.speciality.name}">Name of vacancy</p>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <p th:text="${vacancy.company.name}">Name of vacancy</p>
+            </div>
+
+            <div class="col-md-3">
                 <a th:href="'/admin/vacancies/' + ${vacancy.id} + '/edit'">Редактировать</a>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <form th:method="delete" th:action="'/admin/vacancies/' + ${vacancy.id}">
                     <input type="submit" value="Удалить">
                 </form>

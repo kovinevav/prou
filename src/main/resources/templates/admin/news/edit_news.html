@@ -43,13 +43,18 @@
                 </div>
             </div>
 
+            <div th:insert="~{admin/blocks/dashboard ::dashboard}"></div>
 
-            <div th:insert="admin/blocks/dashboard ::dashboard"></div>
-
-            <form th:method="PATCH" th:object="${news}" th:action="@{/admin/news/{id}(id=${news.getId})}">
+            <form th:method="PATCH" th:object="${news}" th:action="@{/admin/news/{id}(id=${news.getId})}"
+                  enctype="multipart/form-data">
                 <div class="container">
                     <label for="name">Название: </label>
                     <input type="text" th:field="*{title}" id="name" class="form-control"><br>
+                </div>
+
+                <div class="container">
+                    <label for="name">Фото: </label>
+                    <input type="file" name="file" id="file" class="form-control"><br>
                 </div>
 
                 <div class="container">

@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kovynev.vahta.entity.Company;
 import ru.kovynev.vahta.entity.Review;
+import ru.kovynev.vahta.entity.Speciality;
+import ru.kovynev.vahta.entity.Vacancy;
 import ru.kovynev.vahta.rep.CompanyRepository;
 import ru.kovynev.vahta.rep.ReviewRepository;
+import ru.kovynev.vahta.rep.VacanciesRepository;
 
 import java.util.List;
 
@@ -23,19 +26,24 @@ public class CompanyController {
     @Autowired
     CompanyRepository companyRepository;
     @Autowired
+    VacanciesRepository vacanciesRepository;
+    @Autowired
     ReviewRepository reviewRepository;
-    Logger logger = LogManager.getLogger();
+    Logger logger = LogManager.getLogger("CompanyController.class");
 
 
     @GetMapping("/{id}")
-    public String showcompany(@PathVariable(value = "id") long id, Model model) {
+    public String showCompany(@PathVariable(value = "id") long id, Model model) {
 
         Company company = companyRepository.findById(id).orElseThrow();
         Iterable<Review> reviews = reviewRepository.findByCompany(company);
-        model.addAttribute("company", company);
-        model.addAttribute("reviews", reviews);
-        String pathToPhoto = "/home/distr/images/company/" + company.getId() + ".jpg";
+        Iterable<Vacancy> vacancies = vacanciesRepository.findByCompany(company);
+
+
+
+        String pathToPhoto = "/images/company/" + company.getId() + ".jpg";
         model.addAttribute("pathToPhoto", pathToPhoto);
+
         List<Review> reviewList = (List<Review>) reviews;
         if(reviewList.isEmpty()){
         Review review =new Review();
@@ -43,6 +51,17 @@ public class CompanyController {
         ((List<Review>) reviews).add(review);
         }
 
+        List<Vacancy> vacancyList = (List<Vacancy>) vacancies;
+        if(vacancyList.isEmpty()){
+            Vacancy vacancy = new Vacancy();
+            Speciality speciality = new Speciality();
+            speciality.setName("Вакансии по данной компании отсутствуют.");
+            vacancy.setSpeciality(speciality);
+            ((List<Vacancy>) vacancies).add(vacancy);
+        }
+        model.addAttribute("company", company);
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("vacancies", vacancies);
         return "companies/company";
     }
 

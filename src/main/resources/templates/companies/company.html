@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>О компании</title>
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/singin.css">-->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
@@ -15,26 +14,47 @@
 <body>
 
 <div class="container">
-    <div th:insert="blocks/header :: header"></div>
-          <div class="row">
-              <div class="col-9">
-                  <h2 class="class-use-page" th:text="${company.name}">Name</h2>
-                  <p class="class-use-page" rows="15" th:text="${company.text}">Text</p>
-                  <div class="class-use-page">
-                      <a th:href="${company.web}">
-                          <p th:text="${company.web}">WEB </p>
-                      </a>
-                  </div>
-              </div>
-              <div class="col-1">
-                  <img th:src="${pathToPhoto}" height="150">
-              </div>
-          </div>
+    <div th:insert="~{blocks/header :: header}"></div>
 
+    <div class="row">
+        <div class="col-9">
+            <h2 class="class-use-page" th:text="${company.name}">Name</h2>
+            <p class="class-use-page" rows="15" th:text="${company.text}">Text</p>
+            <div class="class-use-page">
+                <a th:href="${company.web}">
+                    <p th:text="${company.web}">WEB </p>
+                </a>
+            </div>
+        </div>
+        <div class="col-3">
+            <img th:src="${pathToPhoto}" height="100 dpi">
+        </div>
+    </div>
+
+    <!--     ************************** Вакансии ****************************   -->
+    <h4>
+        Вакансии
+    </h4>
+
+    <div class="container" th:each="vacancy : ${vacancies}">
+        <div class="row">
+            <div class="col-12">
+                <p class="fst-italic" th:text="${vacancy.speciality.name}"></p>
+            </div>
+            <div class="col-12">
+                <p class="card-text mb-auto" th:text="${vacancy.description}"></p>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <hr>
     <!--    ********************* Список отзывов  ******************************-->
-    <h4>Отзывы о компании</h4>
-    <!-- <div class="row mb-3 bg-light rounded border border-secondary" th:each="review : ${reviews}">-->
 
+        <h4>
+            Отзывы о компании
+            <small th:text="${company.name}"></small>
+
+         </h4>
 
     <div class="container" th:each="review : ${reviews}">
         <div class="row">
@@ -47,11 +67,7 @@
             <hr>
         </div>
     </div>
-    <!--<div class="col p-2 d-flex flex-column position-static">
-        <p class="card-text mb-auto" th:text="${review.text}"></p>
-        <p></p>
-        <p class="fst-italic" th:text="${review.name}"></p>
-    </div>-->
+
 
 
     <!--******************** Форма ввода отзыва ******************************-->
@@ -79,7 +95,7 @@
         </div>
     </form>
 </div>
-<div th:insert="blocks/footer :: footer"></div>
+<div th:insert="~{blocks/footer :: footer}"></div>
 
 </body>
 </html>

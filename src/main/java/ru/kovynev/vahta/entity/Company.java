@@ -32,12 +32,16 @@ public class Company {
     @OneToMany
     private List<Review> reviewList = new ArrayList<>();
 
-    @OneToMany
-    private List<Vacancy> vacancyList = new ArrayList<>();
+/*    @OneToMany
+    private List<Vacancy> vacancyList = new ArrayList<>();*/
 
     public void setReview(Review review) {
         this.reviewList.add(review);
     }
+
+   /* public void setVacancy(Vacancy vacancy) {
+        vacancyList.add(vacancy);
+    }*/
 
     @Override
     public String toString() {

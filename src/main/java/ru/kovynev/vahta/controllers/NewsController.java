@@ -1,5 +1,7 @@
 package ru.kovynev.vahta.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import ru.kovynev.vahta.rep.NewsRepository;
 public class NewsController{
     final
     NewsRepository newsRepository;
+    Logger logger = LogManager.getLogger("NewsController.class");
 
     public NewsController(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
@@ -31,7 +34,8 @@ public class NewsController{
     public String shownews(@PathVariable(value = "id") long id, Model model) {
         News news = newsRepository.findById(id).orElseThrow();
         model.addAttribute("news", news);
-
+        String pathToPhoto = "/images/news/" + news.getId() + ".jpg";
+        model.addAttribute("pathToPhoto", pathToPhoto);
         return "news/news";
     }
 

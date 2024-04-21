@@ -27,7 +27,7 @@ public class AuthController {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
-    Logger log = LogManager.getLogger();
+    Logger log = LogManager.getLogger("AuthController.class");
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
@@ -39,7 +39,6 @@ public class AuthController {
 
     @GetMapping(value = "/login")
     public String loginPage(Model model) {
-        System.out.println("GET_LOGIN");
         model.addAttribute("loginDto", new LoginDto());
         return "auth/login";
     }
@@ -47,7 +46,6 @@ public class AuthController {
 
     @PostMapping(value = "/login")
     public String login(@ModelAttribute("loginDto") LoginDto loginDto) {
-        System.out.println("POST_LOGIN");
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);

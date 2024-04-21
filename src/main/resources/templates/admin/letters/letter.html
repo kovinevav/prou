@@ -29,7 +29,7 @@
 
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
-                <div th:insert="admin/blocks/left_panel :: leftpanel"></div>
+                <div th:insert="~{admin/blocks/left_panel :: leftpanel}"></div>
             </div>
         </nav>
 
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div th:insert="admin/blocks/dashboard ::dashboard"></div>
+            <div th:insert="~{admin/blocks/dashboard ::dashboard}"></div>
 
 
 
