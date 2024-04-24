@@ -23,6 +23,7 @@ public class Company {
     @Column(length = 10000)
     private String text;
     private String web;
+    private String headHunter;
 
 
 

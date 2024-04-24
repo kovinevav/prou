@@ -20,11 +20,23 @@
         <div class="col-9">
             <h2 class="class-use-page" th:text="${company.name}">Name</h2>
             <p class="class-use-page" rows="15" th:text="${company.text}">Text</p>
-            <div class="class-use-page">
+
+
+            <div class="class-use-page" id="WEB">
+                <label for="WEB">WEB:</label>
                 <a th:href="${company.web}">
                     <p th:text="${company.web}">WEB </p>
                 </a>
             </div>
+
+
+            <div class="class-use-page">
+                <label for="WEB">Head Hunter:</label>
+                <a th:href="${company.headHunter}">
+                    <p th:text="${company.headHunter}">Head Hunter: </p>
+                </a>
+            </div>
+
         </div>
         <div class="col-3">
             <img th:src="${pathToPhoto}" height="100 dpi">
