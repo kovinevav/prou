@@ -39,11 +39,11 @@ public class MainController {
         model.addAttribute("companies", companies);
         logger.info("Start of program");
 
-       /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         String login = userDetails.getUsername();
         Optional<UserEntity> userEntityOptional = userRepository.findByUsername(login);
-        UserEntity userEntity = userEntityOptional.get();*/
+        UserEntity userEntity = userEntityOptional.get();
 
        /* userEntity.setName("Andrew");
         userRepository.save(userEntity);
