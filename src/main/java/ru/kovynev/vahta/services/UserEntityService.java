@@ -1,6 +1,5 @@
 package ru.kovynev.vahta.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -10,10 +9,10 @@ import ru.kovynev.vahta.rep.UserRepository;
 import java.util.Optional;
 
 @Service
-public class PersonalPageService {
+public class UserEntityService {
     final UserRepository userRepository;
 
-    public PersonalPageService(UserRepository userRepository) {
+    public UserEntityService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
