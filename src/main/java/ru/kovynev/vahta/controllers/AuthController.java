@@ -1,8 +1,7 @@
 package ru.kovynev.vahta.controllers;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,21 +20,15 @@ import ru.kovynev.vahta.rep.UserRepository;
 import java.util.Collections;
 
 @Controller
+@AllArgsConstructor
+@Log4j2
 @RequestMapping("/auth")
 public class AuthController {
-    private AuthenticationManager authenticationManager;
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
-    Logger log = LogManager.getLogger("AuthController.class");
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @GetMapping(value = "/login")
     public String loginPage(Model model) {
@@ -68,17 +61,14 @@ public class AuthController {
         Role roles = roleRepository.findByName("ROLE_USER").get();
         user.setRoles(Collections.singletonList(roles));
         userRepository.save(user);
-
         return "redirect:/";
     }
 
     @GetMapping("/register")
-    public String showFormRegister(Model model){
+    public String showFormRegister(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
         return "auth/registration";
     }
-
-
 
 
 }

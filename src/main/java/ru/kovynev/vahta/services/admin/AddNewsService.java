@@ -1,5 +1,7 @@
 package ru.kovynev.vahta.services.admin;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -15,23 +17,18 @@ import java.nio.file.Path;
 
 @Service
 @Qualifier("addNews")
+@Log4j2
+@AllArgsConstructor
 public class AddNewsService implements AddNewsServiceInterface {
-    final
-    NewsRepository newsRepository;
-
-    public AddNewsService(NewsRepository newsRepository) {
-        this.newsRepository = newsRepository;
-    }
+    private final NewsRepository newsRepository;
 
     @Override
     public void addNews(MultipartFile file, News news) {
         newsRepository.save(news);
-        System.out.println("id = " + news.getId());
         try {
             if (file != null)
                 Files.copy(file.getInputStream(), Path.of("/home/distr/images/news/" + news.getId() + ".jpg"));
-
-            System.out.println("Copy was successful");
+            log.info("Copy was successful");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

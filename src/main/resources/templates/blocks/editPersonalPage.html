@@ -1,0 +1,48 @@
+<div th:fragment="personal">
+
+
+    <div class="row mb-2">
+        <div class="container">
+            <H2>Персональная страница</H2>
+        </div>
+
+        <form th:method="PATCH" th:object="${userEntity}" th:action="@{/editpersonalpage}"  enctype="multipart/form-data">
+            <div class="col-3">
+                <img th:src="${pathToPhoto}" width="100%">
+            </div>
+            <div class="container">
+                <label for="file">Фото: </label>
+                <input type="file" name="file" id="file" class="form-control"><br>
+            </div>
+
+            <div class="container">
+                <label for="id">ID: </label>
+                <input type="text" th:field="*{id}" id="id" class="form-control" readonly><br>
+            </div>
+            <div class="container">
+                <label for="name">Имя: </label>
+                <input type="text" th:field="*{name}" id="name" class="form-control"><br>
+            </div>
+            <div class="container">
+                <label for="surname">Фамилия: </label>
+                <input type="text" th:field="*{surname}" id="surname" class="form-control"><br>
+            </div>
+            <div class="container">
+                <label for="surname">Специальность: </label>
+                <input type="text" th:field="*{speciality}" id="speciality" class="form-control"><br>
+            </div>
+            <div class="container">
+                <label for="about">О себе: </label>
+                <textarea th:field="*{about}" id="about" class="form-control" rows="10"></textarea>
+            </div>
+
+            <div class="container">
+                <input type="submit" value="Сохранить" class="btn btn-success">
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+

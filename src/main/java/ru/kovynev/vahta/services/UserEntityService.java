@@ -10,17 +10,9 @@ import java.util.Optional;
 
 @Service
 public class UserEntityService {
-    final UserRepository userRepository;
-
-    public UserEntityService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
 
-    public UserEntity getCurrentUserEntity() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String userName = userDetails.getUsername();
-        Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(userName);
-        return optionalUserEntity.get();
-    }
+
+
+
 }

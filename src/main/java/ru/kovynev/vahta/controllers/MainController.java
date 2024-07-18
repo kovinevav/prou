@@ -1,7 +1,10 @@
 package ru.kovynev.vahta.controllers;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
@@ -14,42 +17,28 @@ import ru.kovynev.vahta.entity.Company;
 import ru.kovynev.vahta.entity.UserEntity;
 import ru.kovynev.vahta.rep.CompanyRepository;
 import ru.kovynev.vahta.rep.UserRepository;
+import ru.kovynev.vahta.services.UserEntityService;
 
 import java.util.Optional;
 
 @Controller
+@AllArgsConstructor
+@Log4j2
 public class MainController {
-    final
+    private final
     CompanyRepository companyRepository;
-    Logger logger = LogManager.getLogger(MainController.class);
-    final
+    private final
     UserRepository userRepository;
+    private final
+    UserEntityService userEntityService;
 
-
-    public MainController(CompanyRepository companyRepository, UserRepository userRepository) {
-        this.companyRepository = companyRepository;
-        this.userRepository = userRepository;
-    }
 
     @GetMapping("/")
-    public String index(Model model) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+    public String index(Model model) throws Exception {
         Iterable<Company> companies = companyRepository.findAll(Pageable.ofSize(18));
-
         model.addAttribute("companies", companies);
-        logger.info("Start of program");
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String login = userDetails.getUsername();
-        Optional<UserEntity> userEntityOptional = userRepository.findByUsername(login);
-        UserEntity userEntity = userEntityOptional.get();
-
-       /* userEntity.setName("Andrew");
-        userRepository.save(userEntity);
-        System.out.println(userEntity.getName());*/
-
-
+        log.info("Start of program");
+        userEntityService.getCurrentUserEntity();
         return "index";
     }
 }

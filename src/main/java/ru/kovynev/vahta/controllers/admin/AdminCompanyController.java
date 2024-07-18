@@ -20,11 +20,16 @@ import java.nio.file.Path;
 @Controller
 @RequestMapping("/admin/companies")
 public class AdminCompanyController {
-    @Autowired
+    final
     CompanyRepository companyRepository;
-    @Autowired
+    final
     ReviewRepository reviewRepository;
-    Logger logger = LogManager.getLogger();
+    Logger logger = LogManager.getLogger(AdminCompanyController.class);
+
+    public AdminCompanyController(CompanyRepository companyRepository, ReviewRepository reviewRepository) {
+        this.companyRepository = companyRepository;
+        this.reviewRepository = reviewRepository;
+    }
 
     @GetMapping("/new")
     public String addCompany(Model model) {
@@ -35,7 +40,7 @@ public class AdminCompanyController {
     @PostMapping("")
     public String addCompany(@ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
         companyRepository.save(company);
-        Files.copy(file.getInputStream(), Path.of("images/company/" + company.getId() + ".jpg"));
+        Files.copy(file.getInputStream(), Path.of("/images/company/" + company.getId() + ".jpg"));
         return "redirect:/administrator";
     }
 
@@ -53,7 +58,7 @@ public class AdminCompanyController {
         company.setId(id);
         companyRepository.save(company);
         try {
-            Files.copy(file.getInputStream(), Path.of("/home/distr/images/company/" + company.getId() + ".jpg"));
+            Files.copy(file.getInputStream(), Path.of("/images/company/" + company.getId() + ".jpg"));
         } catch (Exception e) {
             System.out.println("Ошибка при копировании логотипа компании на сервер");
         }
