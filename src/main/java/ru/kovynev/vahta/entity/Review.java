@@ -18,7 +18,6 @@ public class Review {
     @Column(length = 10000)
     private String text;
     private String name;
-    //private LocalDate date;
     @OneToOne
     private Rating rating;
    @ManyToOne

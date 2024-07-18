@@ -1,5 +1,7 @@
 package ru.kovynev.vahta.controllers;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,32 +18,22 @@ import ru.kovynev.vahta.rep.VacanciesRepository;
 import java.util.Date;
 
 @Controller
+@AllArgsConstructor
+@Log4j2
 public class VacancyController {
-    final
+    private final
     VacanciesRepository vacanciesRepository;
     private final CompanyRepository companyRepository;
-    Logger logger = LogManager.getLogger("VacancyController.class");
-
-    public VacancyController(VacanciesRepository vacanciesRepository, CompanyRepository companyRepository) {
-        this.vacanciesRepository = vacanciesRepository;
-        this.companyRepository = companyRepository;
-    }
 
     @GetMapping("vacancies")
-    public String showAll(Model model){
+    public String showAll(Model model) {
         model.addAttribute("vacancies", vacanciesRepository.findAll());
-
         return "vacancies/all_vacancies";
     }
 
     @GetMapping("vacancies/{id}")
-    public String show(@PathVariable("id") Long id, Model model){
+    public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("vacancy", vacanciesRepository.findById(id).orElseThrow());
-
-        Vacancy vacancy = vacanciesRepository.findById(id).orElseThrow();
-       /* String nameOfCompany = vacancy.getCompany().getName();
-        System.out.println(nameOfCompany);*/
-
-        return "vacancies/"+id;
+        return "vacancies/" + id;
     }
 }

@@ -1,7 +1,8 @@
 package ru.kovynev.vahta.controllers;
 
 
-
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,16 @@ import java.util.List;
 
 
 @Controller
+@AllArgsConstructor
+@Log4j2
 @RequestMapping("/companies")
 public class CompanyController {
-    @Autowired
+    private final
     CompanyRepository companyRepository;
-    @Autowired
+    private final
     VacanciesRepository vacanciesRepository;
-    @Autowired
+    private final
     ReviewRepository reviewRepository;
-    Logger logger = LogManager.getLogger("CompanyController.class");
 
 
     @GetMapping("/{id}")
@@ -39,20 +41,18 @@ public class CompanyController {
         Iterable<Review> reviews = reviewRepository.findByCompany(company);
         Iterable<Vacancy> vacancies = vacanciesRepository.findByCompany(company);
 
-
-
-        String pathToPhoto = "/images/company/" + company.getId() + ".jpg";
+        String pathToPhoto = ("${images.company}") + company.getId() + ".jpg";
         model.addAttribute("pathToPhoto", pathToPhoto);
 
         List<Review> reviewList = (List<Review>) reviews;
-        if(reviewList.isEmpty()){
-        Review review =new Review();
-        review.setText("Отзывы по данной компании отсутствуют. Ваш отзыв может стать первым.");
-        ((List<Review>) reviews).add(review);
+        if (reviewList.isEmpty()) {
+            Review review = new Review();
+            review.setText("Отзывы по данной компании отсутствуют. Ваш отзыв может стать первым.");
+            ((List<Review>) reviews).add(review);
         }
 
         List<Vacancy> vacancyList = (List<Vacancy>) vacancies;
-        if(vacancyList.isEmpty()){
+        if (vacancyList.isEmpty()) {
             Vacancy vacancy = new Vacancy();
             Speciality speciality = new Speciality();
             speciality.setName("Вакансии по данной компании отсутствуют.");
@@ -67,9 +67,8 @@ public class CompanyController {
 
     @GetMapping("")
     public String showAll(Model model) {
-        logger.info("Show all companies");
+        log.info("Show all companies");
         Iterable<Company> companies = companyRepository.findAll();
-        //Iterable<Company> companies = companyRepository.findAllByOrderByIdDesc(Pageable.ofSize(16));
 
         model.addAttribute("companies", companies);
         return "companies/all_companies";
