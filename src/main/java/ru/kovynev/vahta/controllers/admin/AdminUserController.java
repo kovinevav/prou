@@ -1,5 +1,6 @@
 package ru.kovynev.vahta.controllers.admin;
 
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ import ru.kovynev.vahta.entity.UserEntity;
 import ru.kovynev.vahta.rep.UserRepository;
 
 @Controller
+@Log4j2
 @RequestMapping("/admin")
 public class AdminUserController {
     final
     UserRepository userRepository;
-    Logger logger = LogManager.getLogger();
 
     public AdminUserController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -24,7 +25,7 @@ public class AdminUserController {
     public String showUsers(Model model){
         Iterable<UserEntity> users = userRepository.findAll();
         model.addAttribute("users", users);
-        logger.info("Started AdminUserController/ShowUsers");
+        log.info("Started AdminUserController/ShowUsers");
         return "admin/users/all_users";
     }
     @DeleteMapping("/user/{id}")
