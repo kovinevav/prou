@@ -34,9 +34,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/admin", "/admin/**").hasRole("ADMIN")
-                .requestMatchers("/administrator", "/administrator/**").hasRole("ADMIN")
-                .requestMatchers("/editpersonalpage").authenticated()
+                .requestMatchers( "/admin/**").hasRole("ADMIN")
+                .requestMatchers( "/administrator/**").hasRole("ADMIN")
+                .requestMatchers("/personalpage/**").authenticated()
                 .requestMatchers("/**").permitAll();
 
 

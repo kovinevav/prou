@@ -37,7 +37,7 @@ public class MainController {
     public String index(Model model) throws Exception {
         Iterable<Company> companies = companyRepository.findAll(Pageable.ofSize(18));
         model.addAttribute("companies", companies);
-        log.info("Start of program");
+        log.info("Show MainPage");
         userEntityService.getCurrentUserEntity();
         return "index";
     }

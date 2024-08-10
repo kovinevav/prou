@@ -1,0 +1,27 @@
+<div th:fragment="personal">
+
+
+    <div class="row mb-2">
+        <div class="container">
+            <H2>Персональная страница</H2>
+        </div>
+
+        <div class="row mb-2">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 th:text="${userEntity.username}"></h3>
+                        <h3 th:text="${userEntity.name}"></h3>
+                        <p class="card-text mb-auto" th:text="${userEntity.surname}"></p>
+
+                    </div>
+
+                </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+</div>
