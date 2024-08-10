@@ -38,7 +38,9 @@ public class AdminCompanyController {
     }
 
     @PostMapping("")
-    public String addCompany(@ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
+    public String addCompany(@ModelAttribute("company") Company company,
+                             @ModelAttribute("file") MultipartFile file)
+                             throws IOException {
         companyRepository.save(company);
         Files.copy(file.getInputStream(), Path.of("/images/company/" + company.getId() + ".jpg"));
         return "redirect:/administrator";
@@ -54,7 +56,12 @@ public class AdminCompanyController {
 
 
     @PatchMapping("/{id}")
-    public String update(@PathVariable(value = "id") long id, @ModelAttribute("company") Company company, @ModelAttribute("file") MultipartFile file) throws IOException {
+    public String update(@PathVariable(value = "id") long id,
+                         @ModelAttribute("company") Company company,
+                         @ModelAttribute("file") MultipartFile file)
+                         throws IOException {
+
+
         company.setId(id);
         companyRepository.save(company);
         try {

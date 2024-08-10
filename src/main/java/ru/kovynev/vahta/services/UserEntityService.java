@@ -10,9 +10,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kovynev.vahta.entity.UserEntity;
 import ru.kovynev.vahta.rep.UserRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 @Service
@@ -51,4 +57,31 @@ public class UserEntityService {
 
     }
 
+    public void update(UserEntity updateUser, MultipartFile file) {
+        UserEntity user = userRepository.findById(updateUser.getId()).orElseThrow();
+        user.setName(updateUser.getName());
+        user.setSurname(updateUser.getSurname());
+        user.setSpeciality(updateUser.getSpeciality());
+        user.setAbout(updateUser.getAbout());
+        userRepository.save(user);
+
+        try {
+            log.info("Try to resave userEntity");
+            if (!file.isEmpty()) {
+                log.info("Name of folder: {}", folder);
+                File directory = new File(folder);
+                if(!directory.exists()) {
+                    directory.mkdir();
+                    log.info("Created new folder: {}", directory.getAbsolutePath());
+                }
+
+                Files.copy(file.getInputStream(), Path.of(folder + user.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+            }
+            log.info("Копирование фото прошло успешно");
+        } catch (IOException e) {
+            log.info("Ошибка в процессе копирования фото");
+            throw new RuntimeException(e);
+        }
+
+    }
 }

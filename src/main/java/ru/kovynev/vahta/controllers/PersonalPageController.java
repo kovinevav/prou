@@ -15,7 +15,7 @@ import ru.kovynev.vahta.services.UserEntityService;
 @Log4j2
 public class PersonalPageController {
     private final UserEntityService userEntityService;
-    private final EditPersonalPageService editPersonalPageService;
+    //private final EditPersonalPageService editPersonalPageService;
 
     @GetMapping("/personalpage")
     public String showPage(Model model) throws Exception {
@@ -30,6 +30,13 @@ public class PersonalPageController {
 
 
         return "/personalPage/messages";
+    }
+
+    @PatchMapping("/editpersonalpage")
+    public String patchPersonalDate(@ModelAttribute("userEntity") UserEntity user,
+                                    @ModelAttribute("file") MultipartFile file) {
+        userEntityService.update(user, file);
+        return "personalPage/personalpage";
     }
 }
 
