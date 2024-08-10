@@ -20,10 +20,7 @@ public class UserEntityController {
 
     @GetMapping("/personal_page")
     public String showPersonalPage(Model model) {
-        UserEntity userEntity = userEntityService.getCurrentUserEntity();
-        System.out.println(userEntity.getName());
-        System.out.println(userEntity.getUsername());
-        System.out.println(userEntity.getPassword());
+
 
         return "personal/personal_page";
     }
