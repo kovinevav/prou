@@ -50,9 +50,9 @@ public class UserEntityService {
         UserEntity userEntity = getCurrentUserEntity();
         log.info("Пользователь авторизован. Переходим на персональную страницу");
         model.addAttribute("userEntity", userEntity);
-       // model.addAttribute("pathToPhoto", "/images/people/" + userEntity.getId() + ".jpg");
+        model.addAttribute("pathToPhoto", "/images/users/" + userEntity.getId() + ".jpg");
 
-        model.addAttribute("pathToPhoto", folder + userEntity.getId() + ".jpg");
+        //model.addAttribute("pathToPhoto", folder + userEntity.getId() + ".jpg");
         return "personalpage/personalpage";
 
     }
@@ -67,16 +67,7 @@ public class UserEntityService {
 
         try {
             log.info("Try to resave userEntity");
-            if (!file.isEmpty()) {
-                log.info("Name of folder: {}", folder);
-                File directory = new File(folder);
-                if(!directory.exists()) {
-                    directory.mkdir();
-                    log.info("Created new folder: {}", directory.getAbsolutePath());
-                }
-
-                Files.copy(file.getInputStream(), Path.of(folder + user.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
-            }
+            Files.copy(file.getInputStream(), Path.of(folder + user.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
             log.info("Копирование фото прошло успешно");
         } catch (IOException e) {
             log.info("Ошибка в процессе копирования фото");

@@ -35,8 +35,11 @@ public class PersonalPageController {
     @PatchMapping("/editpersonalpage")
     public String patchPersonalDate(@ModelAttribute("userEntity") UserEntity user,
                                     @ModelAttribute("file") MultipartFile file) {
+        log.info("PersonalPageController: /editPersonalPage");
         userEntityService.update(user, file);
         return "personalPage/personalpage";
     }
+
+
 }
 
