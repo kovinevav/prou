@@ -36,7 +36,7 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public String showCompany(@PathVariable(value = "id") long id, Model model) {
-
+//TODO Вынести логику в сервис
         Company company = companyRepository.findById(id).orElseThrow();
         Iterable<Review> reviews = reviewRepository.findByCompany(company);
         Iterable<Vacancy> vacancies = vacanciesRepository.findByCompany(company);

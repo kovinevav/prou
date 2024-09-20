@@ -45,6 +45,27 @@ public class SecurityConfig {
                         .loginPage("/auth/login")
                         .permitAll()
                 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         http
                 .logout().permitAll();
 
