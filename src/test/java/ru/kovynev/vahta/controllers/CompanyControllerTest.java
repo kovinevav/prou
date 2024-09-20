@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyControllerTest {
     @BeforeEach
-    CompanyController companyController = new CompanyController();
+
 
     @Test
     void showCompany() {
