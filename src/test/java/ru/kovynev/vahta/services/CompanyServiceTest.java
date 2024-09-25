@@ -1,5 +1,6 @@
 package ru.kovynev.vahta.services;
 
+import jdk.jfr.Label;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,6 +31,7 @@ class CompanyServiceTest {
     private CompanyService companyService;
 
     @Test
+    @Label("getReviewByCompany")
     void getReviewsByCompany() {
         Company company = new Company();
         company.setId(1L);
@@ -37,7 +39,6 @@ class CompanyServiceTest {
         when(reviewRepository.findByCompany(company)).thenReturn(reviewList);
         String expected = "Отзывы по данной компании отсутствуют. Ваш отзыв может стать первым.";
         assertEquals(expected, companyService.getReviewsByCompany(company).get(0).getText());
-
     }
 
     @Test
