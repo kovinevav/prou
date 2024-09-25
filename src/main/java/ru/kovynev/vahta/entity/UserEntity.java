@@ -20,8 +20,11 @@ public class UserEntity {
     private String password;
     private String name;
     private String surname;
+    private String education;
     private String speciality;
+    private String experience;
     private String about;
+    private Boolean publication;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

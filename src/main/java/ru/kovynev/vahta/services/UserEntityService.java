@@ -63,6 +63,9 @@ public class UserEntityService {
         user.setSurname(updateUser.getSurname());
         user.setSpeciality(updateUser.getSpeciality());
         user.setAbout(updateUser.getAbout());
+        user.setEducation(updateUser.getEducation());
+        user.setExperience(updateUser.getExperience());
+        user.setPublication(updateUser.getPublication());
         userRepository.save(user);
 
         try {
