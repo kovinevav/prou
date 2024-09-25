@@ -17,8 +17,10 @@ import java.util.List;
 @Log4j2
 @RequestMapping("/companies")
 public class CompanyController {
+
     private final
     CompanyService companyService;
+
 
     @GetMapping("/{id}")
     public String showCompany(@PathVariable(value = "id") long id, Model model) {
