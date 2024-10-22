@@ -1,0 +1,27 @@
+<div th:fragment="resume">
+    <div class="row mb-2"   >
+        <div class="container">
+            <H2>Компании</H2>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-4"   th:each="company : ${companies}"   >
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                       <!-- <strong class="d-inline-block mb-2 text-primary">Технологии</strong>-->
+                        <h3 th:text="${company.name}"></h3>
+                       <!-- <div class="mb-1 text-muted">12 ноября</div>-->
+                        <p class="card-text mb-auto" th:text="${company.anons}"></p>
+                        <a th:href=" 'companies/' + ${company.id}" class="stretched-link">Узнать больше</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <p><a class="link-opacity-50-hover" href="/images/companies">Посмотреть полный список компаний</a>
+        </div>
+    </div>
+
+
+</div>
