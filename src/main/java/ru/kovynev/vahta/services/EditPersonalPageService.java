@@ -53,7 +53,13 @@ public class EditPersonalPageService {
         Role role = roleRepository.findByName("ROLE_USER").get();
         newUser.setRoles(Collections.singletonList(role));
         newUser.setUsername("fake@mail.ru");
-        userRepository.save(newUser);
+        try {
+            userRepository.save(newUser);
+            log.info("Создан новый фейковый пользователь");
+        }catch (Exception e) {
+            log.error("Что-то пошло не так при сохранении фэйкого юзера после создания" + e);
+        }
+
         return newUser;
     }
 

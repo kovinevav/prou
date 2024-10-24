@@ -69,4 +69,16 @@ public class AdminUserController {
         return "redirect:/admin/all_users";
         //TODO Разобраться с редиректом
     }
+    @PostMapping("/persons")
+    public String saveNewPerson(@ModelAttribute("userEntity") UserEntity user){
+    user.setPublication(true);
+
+    Role role = roleRepository.findByName("ROLE_USER").get();
+    List<Role> roleList = new ArrayList<>();
+    roleList.add(role);
+    user.setRoles(roleList);
+
+    userRepository.save(user);
+        return "redirect:/admin/all_users";
+    }
 }

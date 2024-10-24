@@ -1,15 +1,11 @@
-package ru.kovynev.vahta.controllers.admin;
+package ru.kovynev.vahta.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.kovynev.vahta.entity.UserEntity;
 import ru.kovynev.vahta.rep.UserRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -24,6 +20,4 @@ public class ResumeController {
 
         return "resume/all_resume";
     }
-
-
 }
