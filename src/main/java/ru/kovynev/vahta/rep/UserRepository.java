@@ -6,10 +6,14 @@ import ru.kovynev.vahta.entity.UserEntity;
 
 import java.util.List;
 import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-   Optional<UserEntity> findByUsername(String username);
+    Optional<UserEntity> findByUsername(String username);
+
     Boolean existsByUsername(String username);
+
     List<UserEntity> findUserEntitiesByPublication(Boolean boll);
+
 
 }

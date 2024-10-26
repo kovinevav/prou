@@ -4,12 +4,14 @@
             <H2>Специалисты</H2>
         </div>
         <div class="row mb-2">
-            <div class="col-md-4"   th:each="user : ${users}">
+            <div class="col-md-4"   th:each="resume : ${resumes}"   >
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <h3 th:text="${user.name}"></h3>
-                        <p class="card-text mb-auto" th:text="${user.speciality}"></p>
-                        <a th:href=" 'users/' + ${user.id}" class="stretched-link">Узнать больше</a>
+
+                        <h3 th:text="${resume.speciality}"></h3>
+                       <!-- <div class="mb-1 text-muted">12 ноября</div>-->
+                        <p class="card-text mb-auto" th:text="${resume.name}"></p>
+                        <a th:href=" 'resume/' + ${resume.id}" class="stretched-link">Узнать больше</a>
                     </div>
 
 
@@ -17,7 +19,7 @@
             </div>
         </div>
         <div>
-            <p><a class="link-opacity-50-hover" href="/images/companies">Посмотреть полный список компаний</a>
+            <p><a class="link-opacity-50-hover" href="/images/companies">Посмотреть полный список специалистов</a>
         </div>
     </div>
 
