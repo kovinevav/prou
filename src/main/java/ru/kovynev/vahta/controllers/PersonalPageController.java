@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kovynev.vahta.entity.UserEntity;
+import ru.kovynev.vahta.rep.UserRepository;
 import ru.kovynev.vahta.services.EditPersonalPageService;
 import ru.kovynev.vahta.services.UserEntityService;
 
@@ -15,6 +16,7 @@ import ru.kovynev.vahta.services.UserEntityService;
 @Log4j2
 public class PersonalPageController {
     private final UserEntityService userEntityService;
+    private final UserRepository userRepository;
     //private final EditPersonalPageService editPersonalPageService;
 
     @GetMapping("/personalpage")

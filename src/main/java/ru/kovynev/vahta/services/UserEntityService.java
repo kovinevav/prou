@@ -70,7 +70,7 @@ public class UserEntityService {
 
         try {
             log.info("Try to resave userEntity");
-            Files.copy(file.getInputStream(), Path.of(folder + user.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+            if(!file.isEmpty()) Files.copy(file.getInputStream(), Path.of(folder + user.getId() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
             log.info("Копирование фото прошло успешно");
         } catch (IOException e) {
             log.info("Ошибка в процессе копирования фото");

@@ -55,9 +55,9 @@ public class EditPersonalPageService {
         newUser.setUsername("fake@mail.ru");
         try {
             userRepository.save(newUser);
-            log.info("Создан новый фейковый пользователь");
+            log.info("Создан новый  пользователь");
         }catch (Exception e) {
-            log.error("Что-то пошло не так при сохранении фэйкого юзера после создания" + e);
+            log.error("Что-то пошло не так при сохранении юзера после создания" + e);
         }
 
         return newUser;
