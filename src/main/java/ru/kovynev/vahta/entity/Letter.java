@@ -19,8 +19,10 @@ public class Letter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime date;
-    private String name;
+    private String title;
     private String text;
+    private int from;
+    private int to;
 
     public Letter() {
         date = LocalDateTime.now();

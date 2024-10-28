@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+var/log/provahtu.log
+/resources/properties/
